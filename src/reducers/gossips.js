@@ -1,22 +1,7 @@
 import { combineReducers } from 'redux';
 import * as types from '../types';
 
-const defaultState = {
-  'uuid-blabla-0': {
-    title: 'Etson ya no d clases',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  },
-  'uuid-blabla-1': {
-    title: 'Ya nacio el hijo de lynette!',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  },
-  'uuid-blabla-2': {
-    title: 'Samuel contrato a Michelle!',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  },
-};
-
-const byId = (state = defaultState, action) => {
+const byId = (state = {}, action) => {
   switch (action.type) {
   case types.GOSSIP_CREATED: {
     const { id } = action.payload;
@@ -25,21 +10,60 @@ const byId = (state = defaultState, action) => {
       [id]: action.payload,
     };
   }
+  case types.GOSSIPS_RECIVED: {
+    const stateToBe = {};
+    action.payload.gossips.forEach((gossip) => {
+      stateToBe[gossip.id] = gossip;
+    });
+    return {
+      ...state,
+      ...stateToBe,
+    };
+  }
+  case types.GOSSIP_CREATION_CONFIRMED: {
+    const { oldId, newId } = action.payload;
+    const newState = { ...state };
+    const newGossip = {
+      id: newId,
+      title: newState[oldId].title,
+      description: newState[oldId].description,
+    };
+    delete newState[oldId];
+    return {
+      ...newState,
+      [newId]: newGossip,
+    };
+  }
   default: {
     return state;
   }
   }
 };
 
-const defaultIds = ['uuid-blabla-0', 'uuid-blabla-2', 'uuid-blabla-1'];
-
-const allIds = (state = defaultIds, action) => {
+const allIds = (state = [], action) => {
   switch (action.type) {
   case types.GOSSIP_CREATED: {
     const { id } = action.payload;
     return [
       ...state,
       id,
+    ];
+  }
+  case types.GOSSIPS_RECIVED: {
+    const stateToBe = [];
+    action.payload.gossips.forEach((gossip) => {
+      stateToBe.push(gossip.id);
+    });
+    return [
+      ...state,
+      ...stateToBe,
+    ];
+  }
+  case types.GOSSIP_CREATION_CONFIRMED: {
+    const { oldId, newId } = action.payload;
+    return [
+      ...state.filter(id => id !== oldId),
+      newId,
     ];
   }
   default: {

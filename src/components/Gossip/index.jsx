@@ -20,7 +20,10 @@ const Gossip = ({
 );
 
 Gossip.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
   title: PropTypes.string.isRequired,
 };
 
