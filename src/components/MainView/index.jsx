@@ -1,3 +1,6 @@
+/* Vista principal de la aplicacion con la lista de chismes
+ * y el formulario para crear un nuevo chisme */
+
 import React from 'react';
 import GossipList from '../GossipList';
 import GossipCreator from '../GossipCreator';

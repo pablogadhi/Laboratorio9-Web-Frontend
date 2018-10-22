@@ -1,3 +1,5 @@
+/* Saga principal con forks de todos los observadores */
+
 import { fork, all } from 'redux-saga/effects';
 import * as watchers from './gossips';
 

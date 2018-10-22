@@ -1,3 +1,6 @@
+/* Contenedor principal de la aplicaciones
+ * con las rutas necesarias */
+
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import MainView from './components/MainView';

@@ -1,3 +1,5 @@
+/* Configurador del store de redux necesario en la aplicacion */
+
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import mainReducer from './reducers';

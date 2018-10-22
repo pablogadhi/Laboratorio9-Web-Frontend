@@ -1,3 +1,9 @@
+/* Autor: Pablo Gadhi Rodriguez Marcucci
+ * Fecha: 22 de Octubre del 2018
+ * Descripcion: Frontend para aplicacion que publica chismes. */
+
+/* Punto de entrada de la aplicacion */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

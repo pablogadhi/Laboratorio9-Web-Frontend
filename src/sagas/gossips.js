@@ -1,3 +1,6 @@
+/* Generadores y Observadores de las acciones que usan y ejecuta
+ * la saga de chismes */
+
 import {
   call, takeEvery, takeLatest, put,
 } from 'redux-saga/effects';

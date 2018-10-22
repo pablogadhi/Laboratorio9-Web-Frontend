@@ -1,3 +1,5 @@
+/* Reductor de chismes */
+
 import { combineReducers } from 'redux';
 import * as types from '../types';
 

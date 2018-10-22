@@ -1,3 +1,5 @@
+/* Tipos de acciones de la aplicacion */
+
 export const GOSSIP_CREATED = 'GOSSIP_CREATED';
 export const GOSSIPS_FETCHED = 'GOSSIPS_FETCHED';
 export const GOSSIPS_RECIVED = 'GOSSIPS_RECIVED';

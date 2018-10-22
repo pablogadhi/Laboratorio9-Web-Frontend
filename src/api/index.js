@@ -1,3 +1,5 @@
+/* Operaciones que se llaman del API */
+
 export const fetchGossips = () => fetch('http://localhost:8000/gossips/')
   .then(response => response.json());
 

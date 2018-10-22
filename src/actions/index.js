@@ -1,3 +1,5 @@
+/* Acciones de la aplicacion */
+
 import * as types from '../types';
 
 export const createGossip = (

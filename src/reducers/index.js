@@ -1,3 +1,5 @@
+/* Reductor principal de la aplicacion */
+
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import gossipsReducer, * as gossipSelectors from './gossips';
