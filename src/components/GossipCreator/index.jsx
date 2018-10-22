@@ -10,7 +10,7 @@ let GossipCreator = ({
   handleSubmit,
 }) => (
   <form className="gossip-creator" onSubmit={handleSubmit}>
-    <h5>Título:</h5>
+    <h5 className="creator-title">Título:</h5>
     <Field
       name="title"
       component="input"
@@ -23,7 +23,7 @@ let GossipCreator = ({
       rows="10"
       cols="50"
     />
-    <button type="submit">Publicar!</button>
+    <button className="submit-button" type="submit">Publicar!</button>
   </form>
 );
 

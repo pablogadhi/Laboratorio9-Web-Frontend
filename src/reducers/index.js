@@ -10,3 +10,4 @@ export default combineReducers({
 export const getGossip = (state, id) => gossipSelectors.getGossip(state.gossips, id);
 export const getGossips = state => gossipSelectors.getGossips(state.gossips);
 export const getGossipIds = state => gossipSelectors.getGossipIds(state.gossips);
+export const getDisplayDescription = state => gossipSelectors.getDisplayDescription(state.gossips);

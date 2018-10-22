@@ -13,11 +13,12 @@ export const createGossip = (
   },
 });
 
-export const confirmGossipCreation = (oldId, newId) => ({
+export const confirmGossipCreation = (oldId, newId, date) => ({
   type: types.GOSSIP_CREATION_CONFIRMED,
   payload: {
     oldId,
     newId,
+    date,
   },
 });
 
@@ -43,5 +44,19 @@ export const confirmGossipDeletion = id => ({
   type: types.GOSSIP_DELETION_CONFIRMED,
   payload: {
     id,
+  },
+});
+
+export const fetchGossipDescription = id => ({
+  type: types.GOSSIP_DESCRIPTION_FETCHED,
+  payload: {
+    id,
+  },
+});
+
+export const reciveGossipDescription = description => ({
+  type: types.GOSSIP_DESCRIPTION_RECIVED,
+  payload: {
+    description,
   },
 });

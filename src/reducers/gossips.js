@@ -20,12 +20,12 @@ const byId = (state = {}, action) => {
     };
   }
   case types.GOSSIP_CREATION_CONFIRMED: {
-    const { oldId, newId } = action.payload;
+    const { oldId, newId, date } = action.payload;
     const newState = { ...state };
     const newGossip = {
       id: newId,
       title: newState[oldId].title,
-      description: newState[oldId].description,
+      date,
     };
     delete newState[oldId];
     return {
@@ -78,15 +78,27 @@ const allIds = (state = [], action) => {
   }
 };
 
-const mainReducer = combineReducers({
+const displayDescription = (state = '', action) => {
+  switch (action.type) {
+  case types.GOSSIP_DESCRIPTION_RECIVED: {
+    return action.payload.description;
+  }
+  default:
+    return state;
+  }
+};
+
+const gossipsReducer = combineReducers({
   byId,
   allIds,
+  displayDescription,
 });
 
-export default mainReducer;
+export default gossipsReducer;
 
 export const getGossip = (state, id) => state.byId[id];
 export const getGossips = state => state.allIds.map(
   id => getGossip(state, id),
 );
 export const getGossipIds = state => state.allIds;
+export const getDisplayDescription = state => state.displayDescription;

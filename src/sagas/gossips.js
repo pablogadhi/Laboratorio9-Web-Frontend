@@ -24,7 +24,7 @@ function* createGossipGenerator(action) {
       api.createGossip,
       gossipData,
     );
-    yield put(actions.confirmGossipCreation(id, createdGossip.id));
+    yield put(actions.confirmGossipCreation(id, createdGossip.id, createdGossip.date));
   } catch (e) {
     console.log(e);
   }
@@ -49,6 +49,15 @@ function* deleteGossipGenerator(action) {
   }
 }
 
+function* fetchGossipDescriptionGen(action) {
+  try {
+    const response = yield call(api.getDescription, action.payload.id);
+    yield put(actions.reciveGossipDescription(response.description));
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export function* watchGossipsFetching() {
   yield takeLatest(
     types.GOSSIPS_FETCHED,
@@ -67,5 +76,12 @@ export function* watchGossipDeletion() {
   yield takeEvery(
     types.GOSSIP_DELETED,
     deleteGossipGenerator,
+  );
+}
+
+export function* watchDescriptionFetching() {
+  yield takeLatest(
+    types.GOSSIP_DESCRIPTION_FETCHED,
+    fetchGossipDescriptionGen,
   );
 }

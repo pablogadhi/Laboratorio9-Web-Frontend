@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Gossip from '../Gossip';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions';
+import './glist.css';
 
 class GossipList extends React.Component {
   componentWillMount() {
@@ -20,12 +21,17 @@ class GossipList extends React.Component {
       deleteGossip(params.id);
       history.replace('/');
     }
-    if (gossips.length === 0) {
-      return 'No se han encontrado chismes!';
-    }
-    return gossips.map(id => (
-      <Gossip id={id} key={id} />
-    ));
+    return (
+      <div className="gossip-list">
+        {
+          gossips.length === 0
+            ? 'No se han encontrado chismes!'
+            : gossips.map(id => (
+              <Gossip id={id} key={id} />
+            ))
+        }
+      </div>
+    );
   }
 }
 

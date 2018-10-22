@@ -1,7 +1,13 @@
 .App {
-  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 textarea {
   resize: none;
+}
+
+h1 {
+  text-align: center;
 }

@@ -6,6 +6,7 @@ function* mainSaga() {
     fork(watchers.watchGossipsFetching),
     fork(watchers.watchGossipCreation),
     fork(watchers.watchGossipDeletion),
+    fork(watchers.watchDescriptionFetching),
   ]);
 }
 
