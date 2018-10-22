@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Gossip from '../Gossip';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions';
@@ -12,7 +13,13 @@ class GossipList extends React.Component {
   }
 
   render() {
-    const { gossips } = this.props;
+    const {
+      gossips, match: { params }, deleteGossip, history,
+    } = this.props;
+    if (params.id !== undefined) {
+      deleteGossip(params.id);
+      history.replace('/');
+    }
     if (gossips.length === 0) {
       return 'No se han encontrado chismes!';
     }
@@ -24,10 +31,13 @@ class GossipList extends React.Component {
 
 GossipList.propTypes = {
   gossips: PropTypes.arrayOf(String).isRequired,
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   fetchData: PropTypes.func.isRequired,
+  deleteGossip: PropTypes.func.isRequired,
 };
 
-export default connect(
+export default withRouter(connect(
   state => ({
     gossips: selectors.getGossipIds(state),
   }),
@@ -35,5 +45,8 @@ export default connect(
     fetchData() {
       dispatch(actions.fetchGossips());
     },
+    deleteGossip(id) {
+      dispatch(actions.deleteGossip(id));
+    },
   }),
-)(GossipList);
+)(GossipList));

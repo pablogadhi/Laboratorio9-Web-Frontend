@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as selectors from '../../reducers';
 
 const Gossip = ({
@@ -14,8 +15,8 @@ const Gossip = ({
     {' '}
     {title}
     {' '}
-    <a href={`gossips/view/${id}`}>leer más</a>
-    <a href={`gossips/delete/${id}`}>x borrar</a>
+    <Link to={`/detail/${id}`}>Leer más</Link>
+    <Link to={`${id}`}>x borrar</Link>
   </div>
 );
 

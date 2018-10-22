@@ -31,3 +31,17 @@ export const reciveGossips = gossips => ({
     gossips,
   },
 });
+
+export const deleteGossip = id => ({
+  type: types.GOSSIP_DELETED,
+  payload: {
+    id,
+  },
+});
+
+export const confirmGossipDeletion = id => ({
+  type: types.GOSSIP_DELETION_CONFIRMED,
+  payload: {
+    id,
+  },
+});

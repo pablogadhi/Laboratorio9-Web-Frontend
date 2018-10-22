@@ -5,6 +5,7 @@ function* mainSaga() {
   yield all([
     fork(watchers.watchGossipsFetching),
     fork(watchers.watchGossipCreation),
+    fork(watchers.watchGossipDeletion),
   ]);
 }
 

@@ -39,6 +39,16 @@ function* fetchGossipsGenerator() {
   }
 }
 
+function* deleteGossipGenerator(action) {
+  const { payload: { id } } = action;
+  try {
+    yield call(api.deleteGossip, id);
+    yield put(actions.confirmGossipDeletion(Number(id)));
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export function* watchGossipsFetching() {
   yield takeLatest(
     types.GOSSIPS_FETCHED,
@@ -50,5 +60,12 @@ export function* watchGossipCreation() {
   yield takeEvery(
     types.GOSSIP_CREATED,
     createGossipGenerator,
+  );
+}
+
+export function* watchGossipDeletion() {
+  yield takeEvery(
+    types.GOSSIP_DELETED,
+    deleteGossipGenerator,
   );
 }

@@ -16,7 +16,6 @@ const byId = (state = {}, action) => {
       stateToBe[gossip.id] = gossip;
     });
     return {
-      ...state,
       ...stateToBe,
     };
   }
@@ -33,6 +32,11 @@ const byId = (state = {}, action) => {
       ...newState,
       [newId]: newGossip,
     };
+  }
+  case types.GOSSIP_DELETION_CONFIRMED: {
+    const newState = { ...state };
+    delete newState[action.payload.id];
+    return newState;
   }
   default: {
     return state;
@@ -55,7 +59,6 @@ const allIds = (state = [], action) => {
       stateToBe.push(gossip.id);
     });
     return [
-      ...state,
       ...stateToBe,
     ];
   }
@@ -65,6 +68,9 @@ const allIds = (state = [], action) => {
       ...state.filter(id => id !== oldId),
       newId,
     ];
+  }
+  case types.GOSSIP_DELETION_CONFIRMED: {
+    return state.filter(id => id !== action.payload.id);
   }
   default: {
     return state;

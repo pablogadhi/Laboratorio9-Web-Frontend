@@ -9,3 +9,6 @@ export const createGossip = gossipData => fetch('http://localhost:8000/gossips/'
   body: JSON.stringify(gossipData),
 })
   .then(response => response.json());
+export const deleteGossip = id => fetch(`http://localhost:8000/gossips/${id}/`, {
+  method: 'DELETE',
+})
